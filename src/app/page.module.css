@@ -1,0 +1,372 @@
+/* ─── HOME PAGE — Palmer-Style Editorial ─── */
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 0 var(--container-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 10rem 0 3rem;
+}
+
+.heroLabel {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.heroHeading {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+.heroHeading em {
+  font-style: italic;
+}
+
+.heroMeta {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0;
+}
+
+.heroPill {
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--border-medium);
+  border-radius: 100px;
+}
+
+.heroBottom {
+  position: absolute;
+  bottom: 2.5rem;
+  left: var(--container-padding);
+  right: var(--container-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 2;
+}
+
+.heroDetails {
+  display: flex;
+  gap: 3rem;
+}
+
+.heroDetailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.heroDetailLabel {
+  font-size: 0.6rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.heroDetailValue {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.heroCtaLink {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+}
+
+.heroCtaLink:hover {
+  color: var(--accent-hover);
+}
+
+/* Brand Strip — Palmer-style massive type */
+.brandStrip {
+  padding: 4rem var(--container-padding);
+  max-width: var(--container-max);
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.brandName {
+  font-family: var(--font-sans);
+  font-size: clamp(6rem, 15vw, 16rem);
+  font-weight: 700;
+  line-height: 0.9;
+  color: var(--text-primary);
+  letter-spacing: -0.04em;
+  display: block;
+}
+
+.brandTm {
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  font-weight: 400;
+  color: var(--text-muted);
+  vertical-align: super;
+}
+
+/* Intro */
+.intro {
+  padding: clamp(6rem, 12vh, 14rem) 0;
+}
+
+.introInner {
+  max-width: 800px;
+}
+
+.introHeading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 3.5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.introActions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.textLink {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.textLink:hover {
+  color: var(--text-primary);
+}
+
+/* Projects — Palmer-style asymmetric */
+.projects {
+  padding: 2rem 0 clamp(4rem, 8vh, 8rem);
+}
+
+.projectBlock {
+  display: block;
+  max-width: 50%;
+  margin-bottom: clamp(6rem, 15vh, 18rem);
+  padding: 0 var(--container-padding);
+  text-decoration: none;
+  color: inherit;
+}
+
+.projectBlock:nth-child(even) {
+  margin-left: auto;
+}
+
+.projectBlock:hover .projectName {
+  color: var(--accent-hover);
+}
+
+.projectRight {
+  margin-left: auto;
+}
+
+.projectImageWrap {
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.projectImageWrap .image-placeholder {
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.projectBlock:hover .projectImageWrap .image-placeholder {
+  transform: scale(1.04);
+}
+
+.projectMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 0.25rem;
+}
+
+.projectName {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+}
+
+.projectIndex {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Services — Palmer-style list rows */
+.services {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.serviceList {
+  margin-top: 2rem;
+}
+
+.serviceRow {
+  position: relative;
+}
+
+.serviceRowLine {
+  width: 100%;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.serviceRowContent {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 0;
+  cursor: default;
+  transition: padding-left var(--transition-medium);
+}
+
+.serviceRow:hover .serviceRowContent {
+  padding-left: 1rem;
+}
+
+.serviceRow:hover .serviceRowArrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.serviceRowNum {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex: 0 0 3rem;
+}
+
+.serviceRowTitle {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 0 0 200px;
+}
+
+.serviceRowDesc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.serviceRowArrow {
+  font-size: 1rem;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all var(--transition-medium);
+}
+
+/* Metrics */
+.metrics {
+  border-top: 1px solid var(--border-subtle);
+  padding: clamp(6rem, 14vh, 14rem) 0;
+}
+
+.metricsGrid {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* CTA */
+.cta {
+  padding: clamp(10rem, 20vh, 22rem) 0;
+}
+
+.ctaHeading {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .heroContent {
+    padding: 7rem 0 2rem;
+    max-width: 100%;
+  }
+
+  .heroBottom {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .brandName {
+    font-size: clamp(3.5rem, 12vw, 6rem);
+  }
+
+  .projectBlock,
+  .projectBlock:nth-child(even) {
+    max-width: 100%;
+    margin-left: 0;
+    margin-bottom: 4rem;
+  }
+
+  .serviceRowContent {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .serviceRowTitle {
+    flex: 1 0 100%;
+  }
+
+  .metricsGrid {
+    flex-direction: column;
+    align-items: center;
+    gap: 3.5rem;
+  }
+}

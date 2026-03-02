@@ -1,0 +1,196 @@
+.hero {
+    padding: 10rem 0 4rem;
+}
+
+.heroLabel {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+/* Philosophy */
+.philosophy {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.philInner {
+    display: flex;
+    gap: 5rem;
+}
+
+.philLeft {
+    flex: 0 0 38%;
+}
+
+.philRight {
+    flex: 1;
+}
+
+.pullQuote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin-top: 1.5rem;
+}
+
+/* Capabilities */
+.capabilities {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.capGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.capCard {
+    padding: 2.5rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+}
+
+.capIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    margin-bottom: 1.25rem;
+}
+
+.capTitle {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.capDesc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Team */
+.team {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.teamGrid {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.teamMember {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.memberName {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.memberRole {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Testimonials */
+.testimonials {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.testimonialBlock {
+    position: relative;
+    max-width: 700px;
+}
+
+.quoteIcon {
+    font-family: var(--font-serif);
+    font-size: 6rem;
+    line-height: 0.8;
+    color: rgba(160, 160, 160, 0.2);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.testimonialText {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.testimonialAuthor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.authorName {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.authorTitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Metrics */
+.metrics {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.metricsRow {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .philInner {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .capGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .teamGrid {
+        justify-content: center;
+    }
+
+    .metricsRow {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+}

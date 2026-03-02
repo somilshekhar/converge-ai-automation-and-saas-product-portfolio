@@ -1,0 +1,117 @@
+.hero {
+    padding: 10rem 0 4rem;
+}
+
+.hero .label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.projectRow {
+    display: flex;
+    align-items: center;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 4rem var(--container-padding);
+    gap: 5rem;
+    border-top: 1px solid var(--border-subtle);
+    text-decoration: none;
+    color: inherit;
+    transition: background var(--transition-slow);
+    cursor: pointer;
+}
+
+.projectRow:hover {
+    background: rgba(28, 28, 30, 0.3);
+}
+
+.projectRow:hover .link {
+    color: var(--accent-hover);
+}
+
+.projectRow.reversed {
+    flex-direction: row-reverse;
+}
+
+.projectImage {
+    flex: 0 0 58%;
+    overflow: hidden;
+}
+
+.projectInfo {
+    flex: 1;
+}
+
+.projectLabel {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.summary {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.75rem;
+}
+
+.tag {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--border-medium);
+    border-radius: 100px;
+    color: var(--text-muted);
+}
+
+.link {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    transition: color var(--transition-fast);
+}
+
+.cta {
+    padding: clamp(8rem, 16vh, 16rem) 0;
+}
+
+@media (max-width: 768px) {
+
+    .projectRow,
+    .projectRow.reversed {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .projectImage {
+        flex: none;
+        width: 100%;
+    }
+}

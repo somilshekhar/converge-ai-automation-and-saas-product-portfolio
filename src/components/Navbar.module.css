@@ -1,0 +1,120 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.25rem 0;
+    background: transparent;
+    transition: background var(--transition-medium), padding var(--transition-medium);
+}
+
+.navbar.scrolled {
+    background: rgba(20, 20, 20, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.logo {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+}
+
+.navLink {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+    letter-spacing: 0.01em;
+}
+
+.navLink:hover,
+.navLink.active {
+    color: var(--text-primary);
+}
+
+.mobileToggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.mobileToggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.toggleOpen span:first-child {
+    transform: rotate(45deg) translate(2px, 2px);
+}
+
+.toggleOpen span:last-child {
+    transform: rotate(-45deg) translate(2px, -2px);
+}
+
+@media (max-width: 768px) {
+    .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        flex-direction: column;
+        justify-content: center;
+        background: rgba(20, 20, 20, 0.98);
+        backdrop-filter: blur(20px);
+        gap: 2rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--transition-medium);
+        z-index: 99;
+    }
+
+    .navOpen {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .navLink {
+        font-size: 1.25rem;
+    }
+
+    .mobileToggle {
+        display: flex;
+        z-index: 101;
+    }
+
+    .inner .pill-btn--small {
+        display: none;
+    }
+}

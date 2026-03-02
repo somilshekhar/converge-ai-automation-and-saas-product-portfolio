@@ -1,0 +1,165 @@
+.hero {
+    padding: 10rem 0 4rem;
+}
+
+.heroLabel {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+/* Service Deep-Dive */
+.serviceBlock {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.serviceInner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+.serviceBlock.reversed .serviceInner {
+    flex-direction: row-reverse;
+}
+
+.serviceVisual {
+    flex: 0 0 45%;
+    overflow: hidden;
+}
+
+.serviceContent {
+    flex: 1;
+}
+
+.serviceNum {
+    font-family: var(--font-serif);
+    font-size: 4rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.05);
+    display: block;
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.serviceTitle {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+}
+
+.serviceDesc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1.75rem;
+}
+
+.capList {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.capItem {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding-left: 1.25rem;
+    position: relative;
+    transition: color var(--transition-fast);
+}
+
+.capItem:hover {
+    color: var(--text-primary);
+}
+
+.capItem::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 1px;
+    background: var(--accent);
+}
+
+/* Architecture Diagram */
+.architecture {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.flowDiagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+}
+
+.flowStep {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.flowNode {
+    padding: 1.25rem 2rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-medium);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    transition: border-color var(--transition-medium);
+}
+
+.flowNode:hover {
+    border-color: var(--accent);
+}
+
+.flowArrow {
+    font-size: 1.25rem;
+    color: var(--accent);
+    padding: 0 0.5rem;
+}
+
+/* CTA */
+.cta {
+    padding: clamp(8rem, 16vh, 16rem) 0;
+}
+
+@media (max-width: 768px) {
+
+    .serviceInner,
+    .serviceBlock.reversed .serviceInner {
+        flex-direction: column;
+    }
+
+    .serviceVisual {
+        flex: none;
+        width: 100%;
+    }
+
+    .flowDiagram {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .flowArrow {
+        transform: rotate(90deg);
+    }
+}

@@ -1,0 +1,224 @@
+.hero {
+    padding: 10rem 0 4rem;
+}
+
+.heroLabel {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+/* Timeline */
+.timeline {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.timelineTrack {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.timelineLine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--accent);
+    transform: translateX(-50%);
+}
+
+.timelineEntry {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: calc(50% + 3rem);
+    position: relative;
+    margin-bottom: 4rem;
+}
+
+.timelineEntry.entryRight {
+    justify-content: flex-start;
+    padding-right: 0;
+    padding-left: calc(50% + 3rem);
+    text-align: left;
+}
+
+.entryDot {
+    position: absolute;
+    left: 50%;
+    top: 0.25rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.entryContent {
+    max-width: 350px;
+}
+
+.entryNum {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.06);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.entryTitle {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.entryDesc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Pipeline */
+.pipeline {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.pipelineFlow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+}
+
+.pipeStep {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pipeNode {
+    padding: 1.25rem 2rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-medium);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.pipeArrow {
+    font-size: 1.25rem;
+    color: var(--accent);
+    padding: 0 0.5rem;
+}
+
+/* Architecture */
+.architecture {
+    border-top: 1px solid var(--border-subtle);
+}
+
+.archGrid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.archSide {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.archNode {
+    padding: 1rem 1.5rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-medium);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    position: relative;
+}
+
+.archCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.archCore {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-elevated);
+    border: 2px solid var(--accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* CTA */
+.cta {
+    padding: clamp(8rem, 16vh, 16rem) 0;
+}
+
+@media (max-width: 768px) {
+    .timelineLine {
+        left: 1rem;
+    }
+
+    .timelineEntry,
+    .timelineEntry.entryRight {
+        padding-left: 3.5rem;
+        padding-right: 0;
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .entryDot {
+        left: 1rem;
+    }
+
+    .pipelineFlow {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .pipeArrow {
+        transform: rotate(90deg);
+    }
+
+    .archGrid {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .archSide {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
