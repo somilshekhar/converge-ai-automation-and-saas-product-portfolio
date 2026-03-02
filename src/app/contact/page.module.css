@@ -155,16 +155,43 @@
 }
 
 @media (max-width: 768px) {
+    .contact {
+        padding: 7rem 0 3rem;
+        min-height: auto;
+    }
+
     .grid {
         flex-direction: column;
-        gap: 3rem;
+        gap: 2.5rem;
     }
 
     .left {
         flex: none;
     }
 
+    .heading {
+        font-size: 1.75rem;
+    }
+
+    .desc {
+        font-size: 0.85rem;
+        margin-bottom: 2rem;
+    }
+
     .form {
-        padding: 2rem;
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+    }
+
+    .input,
+    .select,
+    .textarea {
+        font-size: 16px;
+        padding: 0.75rem 0.85rem;
+        border-radius: var(--radius-sm);
+    }
+
+    .submitBtn {
+        min-height: 48px;
     }
 }

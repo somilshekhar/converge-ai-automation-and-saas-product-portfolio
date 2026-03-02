@@ -4,60 +4,68 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./Navbar.module.css";
 
-const navLinks = [
+const links = [
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
     { label: "Projects", href: "/projects" },
     { label: "About", href: "/about" },
     { label: "Process", href: "/process" },
-    { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
-    const [mobileOpen, setMobileOpen] = useState(false);
-    const pathname = usePathname();
+    const [open, setOpen] = useState(false);
+    const path = usePathname();
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 60);
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
+        const handleScroll = () => setScrolled(window.scrollY > 40);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Lock body scroll when mobile menu is open
     useEffect(() => {
-        setMobileOpen(false);
-    }, [pathname]);
+        document.body.style.overflow = open ? "hidden" : "";
+        return () => { document.body.style.overflow = ""; };
+    }, [open]);
 
     return (
         <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
             <div className={styles.inner}>
                 <Link href="/" className={styles.logo}>
-                    Converge Digitals
+                    <span className={styles.logoIcon}>◆</span> Converge Digitals
                 </Link>
 
-                <nav className={`${styles.nav} ${mobileOpen ? styles.navOpen : ""}`}>
-                    {navLinks.map((link) => (
+                <nav className={`${styles.nav} ${open ? styles.navOpen : ""}`}>
+                    {links.map((l) => (
                         <Link
-                            key={link.href}
-                            href={link.href}
-                            className={`${styles.navLink} ${pathname === link.href ? styles.active : ""}`}
+                            key={l.href}
+                            href={l.href}
+                            className={`${styles.navLink} ${path === l.href ? styles.active : ""}`}
+                            onClick={() => setOpen(false)}
                         >
-                            {link.label}
+                            {l.label}
                         </Link>
                     ))}
+                    <Link
+                        href="/contact"
+                        className={`${styles.navLink} ${styles.mobileContact} ${path === "/contact" ? styles.active : ""}`}
+                        onClick={() => setOpen(false)}
+                    >
+                        Contact
+                    </Link>
                 </nav>
 
-                <Link href="/contact" className="pill-btn pill-btn--small">
-                    Get in Touch
+                <Link href="/contact" className={`btn-primary ${styles.ctaBtn}`}>
+                    Contact <span>→</span>
                 </Link>
 
                 <button
-                    className={`${styles.mobileToggle} ${mobileOpen ? styles.toggleOpen : ""}`}
-                    onClick={() => setMobileOpen(!mobileOpen)}
-                    aria-label="Toggle menu"
+                    className={`${styles.mobileToggle} ${open ? styles.toggleOpen : ""}`}
+                    onClick={() => setOpen(!open)}
+                    aria-label="Menu"
                 >
-                    <span />
-                    <span />
+                    <span /><span /><span />
                 </button>
             </div>
         </header>

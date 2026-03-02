@@ -103,15 +103,41 @@
 }
 
 @media (max-width: 768px) {
+    .hero {
+        padding: 7rem 0 2rem;
+    }
 
     .projectRow,
     .projectRow.reversed {
         flex-direction: column;
-        gap: 2rem;
+        gap: 1.5rem;
+        padding: 2rem var(--container-padding);
     }
 
     .projectImage {
         flex: none;
         width: 100%;
+    }
+
+    .title {
+        font-size: 1.25rem;
+    }
+
+    .summary {
+        font-size: 0.82rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .tags {
+        margin-bottom: 1rem;
+    }
+
+    .tag {
+        font-size: 0.55rem;
+        padding: 0.2rem 0.6rem;
+    }
+
+    .cta {
+        padding: 5rem 0;
     }
 }

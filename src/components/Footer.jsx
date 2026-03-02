@@ -1,47 +1,46 @@
 import Link from "next/link";
 import styles from "./Footer.module.css";
 
-const quickLinks = [
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/services" },
-    { label: "Projects", href: "/projects" },
-    { label: "About", href: "/about" },
-    { label: "Process", href: "/process" },
-    { label: "Contact", href: "/contact" },
-];
-
 export default function Footer() {
     return (
         <footer className={styles.footer}>
             <div className={styles.inner}>
-                {/* ─── Massive brand ─── */}
-                <div className={styles.brandRow}>
-                    <span className={styles.brand}>Converge®</span>
+                <div className={styles.top}>
+                    <div className={styles.brand}>
+                        <span className={styles.logoIcon}>◆</span>
+                        <div>
+                            <span className={styles.brandName}>Converge Digitals</span>
+                            <span className={styles.tagline}>AI, Automation & SaaS — Engineered.</span>
+                        </div>
+                    </div>
+
+                    <div className={styles.columns}>
+                        <div className={styles.col}>
+                            <span className={styles.colLabel}>Quick Links</span>
+                            {[["Home", "/"], ["Services", "/services"], ["Projects", "/projects"], ["About", "/about"]].map(([label, href]) => (
+                                <Link key={href} href={href} className={styles.colLink}>{label}</Link>
+                            ))}
+                        </div>
+                        <div className={styles.col}>
+                            <span className={styles.colLabel}>Company</span>
+                            {[["Process", "/process"], ["Contact", "/contact"]].map(([label, href]) => (
+                                <Link key={href} href={href} className={styles.colLink}>{label}</Link>
+                            ))}
+                        </div>
+                        <div className={styles.col}>
+                            <span className={styles.colLabel}>Connect</span>
+                            {["LinkedIn", "Twitter", "GitHub"].map((s) => (
+                                <a key={s} href="#" className={styles.colLink}>{s}</a>
+                            ))}
+                        </div>
+                    </div>
                 </div>
 
                 <div className={styles.divider} />
 
-                {/* ─── Bottom row ─── */}
-                <div className={styles.bottomRow}>
-                    <div className={styles.left}>
-                        <span className={styles.copy}>
-                            © {new Date().getFullYear()} Converge Digitals. All rights reserved.
-                        </span>
-                    </div>
-
-                    <nav className={styles.nav}>
-                        {quickLinks.map((l) => (
-                            <Link key={l.href} href={l.href} className={styles.navLink}>
-                                {l.label}
-                            </Link>
-                        ))}
-                    </nav>
-
-                    <div className={styles.right}>
-                        <a href="mailto:hello@convergedigitals.com" className={styles.email}>
-                            hello@convergedigitals.com
-                        </a>
-                    </div>
+                <div className={styles.bottom}>
+                    <span className={styles.copy}>© {new Date().getFullYear()} Converge Digitals. All rights reserved.</span>
+                    <a href="mailto:hello@convergedigitals.com" className={styles.email}>hello@convergedigitals.com</a>
                 </div>
             </div>
         </footer>
