@@ -172,7 +172,10 @@
   font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 700;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   display: block;
   margin-bottom: 0.35rem;
 }
@@ -190,43 +193,71 @@
   background: var(--bg-primary);
 }
 
-.featureGrid {
+.featureLayout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 8rem;
+  /* Increased gap from 3rem to push the right grid even more to the right */
+  margin-top: 2rem;
+  max-width: 1200px;
+  margin-inline: auto;
+  align-items: start;
+}
+
+.featureHeader {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 6rem;
+}
+
+.featureCardsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-  margin-top: 3.5rem;
+  gap: 1rem;
 }
 
 .featureCard {
-  padding: 2rem;
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition-medium);
 }
 
-.featureIcon {
-  font-size: 2rem;
-  margin-bottom: 1.25rem;
-  display: block;
-  width: 48px;
-  height: 48px;
+.featureCard:hover {
+  transform: translateY(-2px);
+}
+
+.featureIconWrap {
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-md);
+  background: rgba(20, 20, 20, 0.8);
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.featureIcon {
+  font-size: 0.95rem;
+  color: #ff5e62;
 }
 
 .featureTitle {
-  font-family: var(--font-heading);
+  font-family: var(--font-sans);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-primary);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 
 .featureDesc {
-  font-size: 0.85rem;
-  line-height: 1.65;
+  font-size: 0.75rem;
+  line-height: 1.6;
   color: var(--text-muted);
 }
 
@@ -238,22 +269,28 @@
 
 .servicesList {
   margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  /* Space between each service card */
 }
 
 .serviceRow {
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 1.75rem 0;
-  border-bottom: 1px solid var(--border-subtle);
+  padding: 2.5rem 3rem;
+  /* Much larger padding to make them look like big cards */
+  background: var(--bg-card);
+  /* Give them a card background */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  /* Soft border for the spotlight to hit */
+  border-radius: var(--radius-lg);
+  /* Rounded corners */
   text-decoration: none;
   color: inherit;
   transition: all var(--transition-medium);
   cursor: pointer;
-}
-
-.serviceRow:first-child {
-  border-top: 1px solid var(--border-subtle);
 }
 
 .serviceRow:hover {
@@ -267,7 +304,10 @@
 }
 
 .serviceRow:hover .serviceNum {
-  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.4));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .serviceNum {
@@ -330,60 +370,58 @@
 
 .portfolioGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  margin-top: 3rem;
+}
+
+.portfolioCardLarge {
+  grid-column: 1 / -1;
 }
 
 .portfolioCard {
+  position: relative;
   text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-}
-
-.portfolioImage {
+  border-radius: var(--radius-lg);
   overflow: hidden;
-}
-
-.portfolioBody {
-  padding: 1.25rem 1.5rem;
-}
-
-.portfolioYear {
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
   display: block;
 }
 
-.portfolioTitle {
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.75rem;
+.portfolioImage {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
 }
 
-.portfolioTags {
+.portfolioOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.25rem 1.75rem;
+  background: rgba(17, 17, 17, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
-  gap: 0.35rem;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.portfolioTag {
-  font-size: 0.6rem;
+.portfolioTitleText {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 0.2rem 0.6rem;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-full);
-  color: var(--text-muted);
+  color: var(--text-primary);
+}
+
+.portfolioArrow {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  transition: transform var(--transition-medium);
+}
+
+.portfolioCard:hover .portfolioArrow {
+  transform: translateX(4px) translateY(-4px);
 }
 
 /* ─── Metrics ─── */
@@ -395,9 +433,15 @@
 }
 
 .metricsGrid {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ─── CTA ─── */
@@ -519,40 +563,54 @@
   }
 
   /* ─── Features ─── */
-  .featureGrid {
+  .featureLayout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .featureHeader {
+    position: static;
+    margin-bottom: 0.5rem;
+  }
+
+  .featureCardsGrid {
     grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
   }
 
   .featureCard {
-    padding: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .featureIconWrap {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 1rem;
   }
 
   .featureIcon {
-    width: 36px;
-    height: 36px;
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
   }
 
   .featureTitle {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
   }
 
   .featureDesc {
-    font-size: 0.78rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-size: 0.8rem;
   }
 
   /* ─── Services ─── */
   .serviceRow {
     flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 1.25rem 0;
+    gap: 0.75rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: var(--radius-md);
+  }
+
+  .serviceRow:hover {
+    padding-left: 1.25rem;
   }
 
   .serviceNum {
@@ -601,5 +659,21 @@
   .ctaGlow {
     width: 300px;
     height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .featureCardsGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .aboutRight {
+    grid-template-columns: 1fr;
   }
 }

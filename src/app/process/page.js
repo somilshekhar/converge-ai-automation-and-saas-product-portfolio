@@ -1,13 +1,20 @@
+"use client";
 import Link from "next/link";
 import { processSteps } from "@/lib/data";
 import styles from "./page.module.css";
 
-export const metadata = {
-    title: "Process – Converge Digitals AI Lab",
-    description: "A disciplined, iterative process from discovery to deployment.",
-};
-
 export default function ProcessPage() {
+    const handleSpotlightMouseMove = (e) => {
+        const cards = e.currentTarget.querySelectorAll('.spotlight-card');
+        cards.forEach((card) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    };
+
     return (
         <>
             {/* ─── HERO ─── */}
@@ -48,15 +55,30 @@ export default function ProcessPage() {
             <section className={`section ${styles.pipeline} gsap-reveal`}>
                 <div className="container">
                     <p className="section-heading">Automation Pipeline</p>
-                    <div className={`${styles.pipelineFlow} gsap-stagger-group`}>
-                        {["Data Ingestion", "AI Processing", "Decision Engine", "Action Triggers", "Monitoring"].map(
-                            (node, i, arr) => (
-                                <div key={node} className={styles.pipeStep}>
-                                    <div className={styles.pipeNode}>{node}</div>
-                                    {i < arr.length - 1 && <div className={styles.pipeArrow}>→</div>}
+                    <p className={styles.pipelineSubtitle}>
+                        From raw data to intelligent action — our five-stage automation engine powers every deployment.
+                    </p>
+                    <div
+                        className={`${styles.pipelineFlow} gsap-stagger-group spotlight-group`}
+                        onMouseMove={handleSpotlightMouseMove}
+                    >
+                        {[
+                            { num: "01", icon: "📥", title: "Data Ingestion", desc: "Collect and normalize data from APIs, databases, and live streams." },
+                            { num: "02", icon: "🧠", title: "AI Processing", desc: "Run models for classification, extraction, and pattern recognition." },
+                            { num: "03", icon: "⚙️", title: "Decision Engine", desc: "Apply business rules and ML-driven logic to route outcomes." },
+                            { num: "04", icon: "⚡", title: "Action Triggers", desc: "Execute automated workflows, alerts, and third-party integrations." },
+                            { num: "05", icon: "📊", title: "Monitoring", desc: "Track performance metrics and continuously optimize the pipeline." },
+                        ].map((node, i) => (
+                            <div key={node.title} className={`${styles.pipeCard} spotlight-card`}>
+                                <div className={styles.pipeCardInner}>
+                                    <span className={styles.pipeNum}>{node.num}</span>
+                                    <span className={styles.pipeIcon}>{node.icon}</span>
+                                    <h4 className={styles.pipeTitle}>{node.title}</h4>
+                                    <p className={styles.pipeDesc}>{node.desc}</p>
                                 </div>
-                            )
-                        )}
+                                {i < 4 && <div className={styles.pipeConnector} />}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -65,18 +87,21 @@ export default function ProcessPage() {
             <section className={`section ${styles.architecture} gsap-reveal`}>
                 <div className="container">
                     <p className="section-heading">System Architecture</p>
-                    <div className={`${styles.archGrid} gsap-stagger-group`}>
+                    <div
+                        className={`${styles.archGrid} gsap-stagger-group spotlight-group`}
+                        onMouseMove={handleSpotlightMouseMove}
+                    >
                         <div className={styles.archSide}>
                             {["LLM APIs", "Vector Database", "RAG Pipeline"].map((n) => (
-                                <div key={n} className={styles.archNode}>{n}</div>
+                                <div key={n} className={`${styles.archNode} spotlight-card`}>{n}</div>
                             ))}
                         </div>
                         <div className={styles.archCenter}>
-                            <div className={styles.archCore}>AI Core</div>
+                            <div className={`${styles.archCore} spotlight-card`}>AI Core</div>
                         </div>
                         <div className={styles.archSide}>
                             {["ML Models", "Client APIs", "Dashboard"].map((n) => (
-                                <div key={n} className={styles.archNode}>{n}</div>
+                                <div key={n} className={`${styles.archNode} spotlight-card`}>{n}</div>
                             ))}
                         </div>
                     </div>

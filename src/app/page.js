@@ -14,6 +14,17 @@ const SplineHero = dynamic(() => import("@/components/SplineHero"), {
 export default function Home() {
   const featured = projects.slice(0, 3);
 
+  const handleSpotlightMouseMove = (e) => {
+    const cards = e.currentTarget.querySelectorAll('.spotlight-card');
+    cards.forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  };
+
   return (
     <>
       {/* ═══ HERO ═══ */}
@@ -21,15 +32,15 @@ export default function Home() {
         <div className={styles.heroGlow} />
         <div className={styles.heroGlow2} />
         {/* Spline covers full hero for whole-screen interaction */}
-        <div className={styles.heroSplineFullscreen}>
+        <div className={styles.heroSplineFullscreen} data-hide-cursor="true">
           <SplineHero />
         </div>
         <div className={styles.heroInner}>
           <div className={`${styles.heroContent} gsap-hero-entrance`}>
             <div className="section-label">AI-Powered Engineering Studio</div>
-            <h1 className={styles.heroHeading}>
-              <span className="gradient-text">Redefining</span> the Future
-              <br />of Digital Systems.
+            <h1 className={styles.heroHeading} style={{ textTransform: 'uppercase', lineHeight: 1.1 }}>
+              <span className="gradient-text">REDEFINING</span> THE FUTURE
+              <br /><span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, fontSize: '1.1em', letterSpacing: '-0.02em' }}>OF DIGITAL SYSTEMS</span>
             </h1>
             <p className={styles.heroSub}>
               Creating intelligent solutions that redefine innovation. Stay ahead
@@ -50,7 +61,7 @@ export default function Home() {
       {/* ═══ MARQUEE ═══ */}
       <Marquee
         items={["AI Solutions", "Workflow Automation", "SaaS Architecture", "Machine Learning", "Data Pipelines", "API Integration", "Cloud Infrastructure"]}
-        speed={28}
+        speed={12}
       />
 
       {/* ═══ ABOUT ═══ */}
@@ -72,20 +83,20 @@ export default function Home() {
                 Learn More →
               </Link>
             </div>
-            <div className={`${styles.aboutRight} gsap-stagger-group`}>
-              <div className={styles.statCard}>
+            <div className={`${styles.aboutRight} gsap-stagger-group spotlight-group`} onMouseMove={handleSpotlightMouseMove}>
+              <div className={`${styles.statCard} spotlight-card`}>
                 <span className={styles.statNumber}>120+</span>
                 <span className={styles.statLabel}>Projects Delivered</span>
               </div>
-              <div className={styles.statCard}>
+              <div className={`${styles.statCard} spotlight-card`}>
                 <span className={styles.statNumber}>98.6%</span>
                 <span className={styles.statLabel}>Client Satisfaction</span>
               </div>
-              <div className={styles.statCard}>
+              <div className={`${styles.statCard} spotlight-card`}>
                 <span className={styles.statNumber}>38+</span>
                 <span className={styles.statLabel}>Global Brands</span>
               </div>
-              <div className={styles.statCard}>
+              <div className={`${styles.statCard} spotlight-card`}>
                 <span className={styles.statNumber}>50ms</span>
                 <span className={styles.statLabel}>Avg. Latency</span>
               </div>
@@ -97,28 +108,42 @@ export default function Home() {
       {/* ═══ FEATURES ═══ */}
       <section className={`section ${styles.features}`}>
         <div className="container">
-          <div className="gsap-reveal" style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
-            <div className="section-label" style={{ margin: '0 auto 1.5rem' }}>Features</div>
-            <h2 className="section-heading gsap-heading">Packed with Innovation.</h2>
-            <p className="subtitle" style={{ margin: '1rem auto 0' }}>
-              Everything you need to build, automate, and scale — all in one place.
-            </p>
-          </div>
-          <div className={`${styles.featureGrid} gsap-stagger-group`}>
-            {[
-              { icon: "🔗", title: "Seamless API Integrations", desc: "Connect with any third-party service. REST, GraphQL, webhooks — all handled." },
-              { icon: "🛡️", title: "Enterprise Security", desc: "SOC 2 compliant architecture with role-based access and encryption at rest." },
-              { icon: "🎙️", title: "AI-Speech Recognition", desc: "Voice-enabled interfaces that understand context and drive actions." },
-              { icon: "📊", title: "Real-Time Analytics", desc: "Live dashboards with instant insights for faster decision-making." },
-              { icon: "👁️", title: "Computer Vision", desc: "AI-powered image and video recognition for automated processing." },
-              { icon: "⚡", title: "Predictive Intelligence", desc: "ML models that forecast trends and automate data-driven decisions." },
-            ].map((f) => (
-              <div key={f.title} className={`${styles.featureCard} card`}>
-                <span className={styles.featureIcon}>{f.icon}</span>
-                <h3 className={styles.featureTitle}>{f.title}</h3>
-                <p className={styles.featureDesc}>{f.desc}</p>
+          <div className={styles.featureLayout}>
+            {/* Header on the left */}
+            <div className={`${styles.featureHeader} gsap-reveal`}>
+              <h2 className="section-heading" style={{ textTransform: 'uppercase', fontSize: 'clamp(2.5rem, 4.5vw, 4rem)', lineHeight: 1, margin: 0, paddingBottom: '3rem', fontWeight: 400 }}>
+                FEATURES
+              </h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem', marginTop: 'auto' }}>
+                <p style={{ fontSize: '0.8rem', fontWeight: 500 }}>Launch</p>
+                <p style={{ fontSize: '0.8rem', fontWeight: 500, color: 'var(--text-muted)' }}>with Ease</p>
               </div>
-            ))}
+              <div style={{ marginTop: '2rem' }}>
+                <span style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>↗</span>
+              </div>
+            </div>
+
+            {/* Cards grid aligned to the right (Spotlight Mouse Effect) */}
+            <div
+              className={`${styles.featureCardsGrid} gsap-stagger-group spotlight-group`}
+              onMouseMove={handleSpotlightMouseMove}
+            >
+              {[
+                { icon: "🔗", title: "Unlimited Requests", desc: "Get unlimited task requests. Prioritize what is needed in your business." },
+                { icon: "🚀", title: "Launch Fast", desc: "Get started requests fast. Immediately after subscribing and expect a 2 day average turnaround time." },
+                { icon: "🚩", title: "Start Today", desc: "Get started requests today. Immediately after subscribing and expect a 2 day average turnaround time." },
+                { icon: "⏸️", title: "Pause Or Cancel Anytime", desc: "Easily pause or cancel your subscription at any point. Giving you the flexibility your business needs." },
+                { icon: "💰", title: "Affordable Pricing", desc: "Save up to 70% per year hiring our team compared to hiring a full-time designer & developer." },
+              ].map((f) => (
+                <div key={f.title} className={`${styles.featureCard} card spotlight-card`}>
+                  <div className={styles.featureIconWrap}>
+                    <span className={styles.featureIcon}>{f.icon}</span>
+                  </div>
+                  <h3 className={styles.featureTitle}>{f.title}</h3>
+                  <p className={styles.featureDesc}>{f.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -127,19 +152,18 @@ export default function Home() {
       <section className={`section ${styles.services}`}>
         <div className="container">
           <div className="gsap-reveal">
-            <div className="section-label">Services</div>
-            <h2 className="section-heading gsap-heading">
-              Future-Driven Solutions for Modern Businesses.
+            <h2 className="section-heading gsap-heading" style={{ textTransform: 'uppercase' }}>
+              SERVICES
             </h2>
           </div>
-          <div className={styles.servicesList}>
+          <div className={`${styles.servicesList} spotlight-group`} onMouseMove={handleSpotlightMouseMove}>
             {[
               { n: "01", title: "AI Solutions", desc: "LLM integration, RAG pipelines, ML model deployment, and intelligent assistants.", tags: ["GPT", "RAG", "ML"] },
               { n: "02", title: "Workflow Automation", desc: "Process orchestration, smart triggers, API middleware, and n8n/Zapier alternatives.", tags: ["n8n", "APIs", "Triggers"] },
               { n: "03", title: "Custom SaaS Platforms", desc: "Multi-tenant architecture, subscription billing, admin dashboards, and cloud infrastructure.", tags: ["Next.js", "AWS", "Stripe"] },
               { n: "04", title: "Internal Tools & Dashboards", desc: "Admin panels, data pipelines, monitoring systems, and reporting dashboards.", tags: ["Analytics", "Pipelines", "Dashboards"] },
             ].map((s) => (
-              <Link href="/services" key={s.n} className={`${styles.serviceRow} gsap-reveal`}>
+              <Link href="/services" key={s.n} className={`${styles.serviceRow} gsap-reveal spotlight-card`}>
                 <span className={styles.serviceNum}>{s.n}</span>
                 <div className={styles.serviceInfo}>
                   <h3 className={styles.serviceTitle}>{s.title}</h3>
@@ -159,27 +183,23 @@ export default function Home() {
 
       {/* ═══ PORTFOLIO ═══ */}
       <section className={`section ${styles.portfolio}`}>
-        <div className="container">
-          <div className="gsap-reveal" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }}>
-            <div>
-              <div className="section-label">Portfolio</div>
-              <h2 className="section-heading gsap-heading">Work with Pure Precision.</h2>
-            </div>
-            <Link href="/projects" className="btn-secondary">View All Works →</Link>
+        <div className="container" style={{ maxWidth: "1200px" }}>
+          <div className="gsap-reveal" style={{ textAlign: "left", marginBottom: "3rem" }}>
+            <h2 className="section-heading gsap-heading" style={{ textTransform: 'uppercase', fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 300, fontFamily: 'var(--font-serif)', letterSpacing: '-0.02em' }}>
+              OUR WORKS
+            </h2>
           </div>
-          <div className={`${styles.portfolioGrid} gsap-stagger-group`}>
-            {featured.map((p) => (
-              <Link key={p.slug} href={`/projects/${p.slug}`} className={`${styles.portfolioCard} card`}>
+
+          <div className={`${styles.portfolioGrid} gsap-stagger-group spotlight-group`} onMouseMove={handleSpotlightMouseMove}>
+            {featured.map((p, i) => (
+              <Link data-cursor="view" key={p.slug} href={`/projects/${p.slug}`} className={`${styles.portfolioCard} ${i === 0 ? styles.portfolioCardLarge : ""} spotlight-card`}>
                 <div className={`${styles.portfolioImage} gsap-clip-reveal`}>
-                  <div className="image-placeholder" style={{ paddingBottom: '65%', borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0' }} />
-                </div>
-                <div className={styles.portfolioBody}>
-                  <span className={styles.portfolioYear}>2024</span>
-                  <h3 className={styles.portfolioTitle}>{p.title}</h3>
-                  <div className={styles.portfolioTags}>
-                    {p.tags.slice(0, 3).map((t) => (
-                      <span key={t} className={styles.portfolioTag}>{t}</span>
-                    ))}
+                  <div className="image-placeholder" style={{ paddingBottom: i === 0 ? '45%' : '80%' }} />
+
+                  {/* Glassmorphism Title Overlay */}
+                  <div className={styles.portfolioOverlay}>
+                    <span className={styles.portfolioTitleText}>{p.title} / {p.label || 'Project'}</span>
+                    <span className={styles.portfolioArrow}>→</span>
                   </div>
                 </div>
               </Link>
@@ -191,11 +211,11 @@ export default function Home() {
       {/* ═══ METRICS ═══ */}
       <section className={`section ${styles.metrics}`}>
         <div className="container">
-          <div className={`${styles.metricsGrid} gsap-stagger-group`}>
-            <div className="gsap-counter"><MetricCounter value="98.6" suffix="%" label="Client Satisfaction" /></div>
-            <div className="gsap-counter"><MetricCounter value="120" suffix="+" label="Projects Delivered" /></div>
-            <div className="gsap-counter"><MetricCounter value="38" suffix="+" label="Global Brands" /></div>
-            <div className="gsap-counter"><MetricCounter value="50" suffix="ms" label="Inference Latency" /></div>
+          <div className={`${styles.metricsGrid} gsap-stagger-group spotlight-group`} onMouseMove={handleSpotlightMouseMove}>
+            <div className="gsap-counter spotlight-card" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}><MetricCounter value="98.6" suffix="%" label="Client Satisfaction" /></div>
+            <div className="gsap-counter spotlight-card" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}><MetricCounter value="120" suffix="+" label="Projects Delivered" /></div>
+            <div className="gsap-counter spotlight-card" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}><MetricCounter value="38" suffix="+" label="Global Brands" /></div>
+            <div className="gsap-counter spotlight-card" style={{ padding: '2rem', borderRadius: 'var(--radius-lg)' }}><MetricCounter value="50" suffix="ms" label="Inference Latency" /></div>
           </div>
         </div>
       </section>

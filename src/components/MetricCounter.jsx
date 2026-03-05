@@ -1,31 +1,12 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import styles from "./MetricCounter.module.css";
 
 export default function MetricCounter({ value, label, suffix = "" }) {
     const ref = useRef(null);
     const [display, setDisplay] = useState("0");
-    const [hasAnimated, setHasAnimated] = useState(false);
 
-    useEffect(() => {
-        const el = ref.current;
-        if (!el) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting && !hasAnimated) {
-                    setHasAnimated(true);
-                    animateCount();
-                }
-            },
-            { threshold: 0.3 }
-        );
-
-        observer.observe(el);
-        return () => observer.disconnect();
-    }, [hasAnimated]);
-
-    const animateCount = () => {
+    const animateCount = useCallback(() => {
         const numericValue = parseFloat(value.replace(/[^0-9.]/g, ""));
         const duration = 2000;
         const startTime = performance.now();
@@ -50,7 +31,26 @@ export default function MetricCounter({ value, label, suffix = "" }) {
         };
 
         requestAnimationFrame(tick);
-    };
+    }, [value]);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    // Reset to 0 and re-animate every time it enters the viewport
+                    setDisplay("0");
+                    animateCount();
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [animateCount]);
 
     return (
         <div className={styles.metric} ref={ref}>

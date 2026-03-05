@@ -158,6 +158,7 @@
     .contact {
         padding: 7rem 0 3rem;
         min-height: auto;
+        align-items: flex-start;
     }
 
     .grid {
@@ -167,6 +168,7 @@
 
     .left {
         flex: none;
+        width: 100%;
     }
 
     .heading {
@@ -178,9 +180,23 @@
         margin-bottom: 2rem;
     }
 
+    .details {
+        gap: 1.25rem;
+    }
+
+    .socialLinks {
+        gap: 1rem;
+    }
+
+    .right {
+        width: 100%;
+    }
+
     .form {
         padding: 1.5rem;
         border-radius: var(--radius-lg);
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .input,
@@ -189,9 +205,46 @@
         font-size: 16px;
         padding: 0.75rem 0.85rem;
         border-radius: var(--radius-sm);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .textarea {
+        min-height: 100px;
     }
 
     .submitBtn {
         min-height: 48px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact {
+        padding: 6rem 0 2rem;
+    }
+
+    .heading {
+        font-size: 1.5rem;
+    }
+
+    .desc {
+        font-size: 0.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .form {
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+
+    .label {
+        font-size: 0.65rem;
+    }
+
+    .input,
+    .select,
+    .textarea {
+        padding: 0.65rem 0.75rem;
     }
 }

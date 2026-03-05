@@ -7,7 +7,10 @@
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.25em;
-    color: var(--accent);
+    background: linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     display: block;
     margin-bottom: 1.5rem;
 }
@@ -95,46 +98,113 @@
     background: var(--accent);
 }
 
-/* Architecture Diagram */
+/* Architecture Pipeline */
 .architecture {
     border-top: 1px solid var(--border-subtle);
+    text-align: center;
+    padding: clamp(5rem, 10vh, 10rem) 0;
 }
 
-.flowDiagram {
+.archLabel {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.archHeading {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.archSubtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto 4rem;
+    line-height: 1.6;
+}
+
+.pipeline {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     gap: 0;
-    flex-wrap: wrap;
+    width: 100%;
 }
 
-.flowStep {
+.pipelineStep {
     display: flex;
-    align-items: center;
-    gap: 1rem;
+    align-items: stretch;
+    flex: 1;
+    max-width: 220px;
 }
 
-.flowNode {
-    padding: 1.25rem 2rem;
+.pipelineNode {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2rem 1.25rem;
     background: var(--bg-elevated);
     border: 1px solid var(--border-medium);
-    font-size: 0.75rem;
-    font-weight: 500;
+    border-radius: 12px;
+    text-align: center;
+    overflow: hidden;
+    transition: border-color var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium);
+    position: relative;
+}
+
+.pipelineNode:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(99, 102, 241, 0.08);
+}
+
+.pipelineNum {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), rgba(99, 102, 241, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.75rem;
+    line-height: 1;
+}
+
+.pipelineTitle {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--text-primary);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    white-space: nowrap;
-    transition: border-color var(--transition-medium);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.6rem;
 }
 
-.flowNode:hover {
-    border-color: var(--accent);
+.pipelineDesc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
 }
 
-.flowArrow {
-    font-size: 1.25rem;
-    color: var(--accent);
-    padding: 0 0.5rem;
+.pipelineConnector {
+    width: 40px;
+    min-width: 24px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), rgba(99, 102, 241, 0.15));
+    flex-shrink: 0;
+    align-self: center;
 }
 
 /* CTA */
@@ -171,24 +241,47 @@
         margin-bottom: 1.25rem;
     }
 
-    .flowDiagram {
+    .pipeline {
         flex-direction: column;
-        gap: 0.75rem;
+        align-items: center;
+        gap: 0;
     }
 
-    .flowNode {
-        padding: 0.85rem 1.25rem;
-        font-size: 0.65rem;
-        white-space: normal;
-        text-align: center;
+    .pipelineStep {
+        flex-direction: column;
+        max-width: 100%;
         width: 100%;
     }
 
-    .flowArrow {
-        transform: rotate(90deg);
+    .pipelineNode {
+        padding: 1.5rem;
+    }
+
+    .pipelineConnector {
+        width: 2px;
+        height: 28px;
+        background: linear-gradient(180deg, var(--accent), rgba(99, 102, 241, 0.15));
     }
 
     .cta {
         padding: 5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .serviceTitle {
+        font-size: 1.1rem;
+    }
+
+    .pipelineNode {
+        padding: 1.25rem 1rem;
+    }
+
+    .pipelineTitle {
+        font-size: 0.78rem;
+    }
+
+    .pipelineDesc {
+        font-size: 0.7rem;
     }
 }

@@ -1,13 +1,20 @@
+"use client";
 import Link from "next/link";
 import { services } from "@/lib/data";
 import styles from "./page.module.css";
-
-export const metadata = {
-    title: "Services – Converge Digitals AI Lab",
-    description: "AI Solutions, Workflow Automation, Custom SaaS Tools, and Internal Systems engineering.",
-};
+import StickyTabs from "@/components/StickyTabs";
 
 export default function ServicesPage() {
+    const handleSpotlightMouseMove = (e) => {
+        const cards = e.currentTarget.querySelectorAll('.spotlight-card');
+        cards.forEach((card) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    };
     return (
         <>
             {/* ─── HERO ─── */}
@@ -21,43 +28,59 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* ─── SERVICE DEEP-DIVES ─── */}
-            {services.map((svc, i) => (
-                <section
-                    key={svc.number}
-                    className={`section ${styles.serviceBlock} ${i % 2 !== 0 ? styles.reversed : ""}`}
-                >
-                    <div className={styles.serviceInner}>
-                        <div className={`${styles.serviceVisual} gsap-parallax`}>
-                            <div className="image-placeholder" style={{ paddingBottom: "75%" }} />
+            {/* ─── SERVICE DEEP-DIVES (Sticky Tabs) ─── */}
+            <StickyTabs mainNavHeight="3.5rem">
+                {services.map((svc, i) => (
+                    <StickyTabs.Item
+                        key={svc.number}
+                        id={svc.number}
+                        title={
+                            <>
+                                <span style={{ opacity: 0.3, letterSpacing: "-0.04em", fontSize: "1.2em", fontWeight: 700 }}>{svc.number}</span>
+                                <span>{svc.title}</span>
+                            </>
+                        }
+                    >
+                        <div className={styles.serviceInner}>
+                            <div className={`${styles.serviceContent}`}>
+                                <p className={styles.serviceDesc}>{svc.description}</p>
+                                <ul className={styles.capList}>
+                                    {svc.capabilities.map((c) => (
+                                        <li key={c} className={styles.capItem}>{c}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className={`${styles.serviceVisual}`}>
+                                <div className="image-placeholder" style={{ paddingBottom: "75%" }} />
+                            </div>
                         </div>
-                        <div className={`${styles.serviceContent} gsap-reveal`}>
-                            <span className={styles.serviceNum}>{svc.number}</span>
-                            <h2 className={`${styles.serviceTitle} gsap-heading`}>{svc.title}</h2>
-                            <p className={styles.serviceDesc}>{svc.description}</p>
-                            <ul className={styles.capList}>
-                                {svc.capabilities.map((c) => (
-                                    <li key={c} className={styles.capItem}>{c}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-            ))}
+                    </StickyTabs.Item>
+                ))}
+            </StickyTabs>
 
-            {/* ─── ARCHITECTURE ─── */}
+            {/* ─── ARCHITECTURE PIPELINE ─── */}
             <section className={`section ${styles.architecture} gsap-reveal`}>
                 <div className="container">
-                    <p className="section-heading">How It Connects</p>
-                    <div className={`${styles.flowDiagram} gsap-stagger-group`}>
-                        {["Data Sources", "AI Processing", "Automation Layer", "SaaS Delivery", "Client Systems"].map(
-                            (node, i, arr) => (
-                                <div key={node} className={styles.flowStep}>
-                                    <div className={styles.flowNode}>{node}</div>
-                                    {i < arr.length - 1 && <div className={styles.flowArrow}>→</div>}
+                    <p className={styles.archLabel}>Our Pipeline</p>
+                    <h2 className={`${styles.archHeading} gsap-heading`}>How It Connects</h2>
+                    <p className={styles.archSubtitle}>From raw data to deployed systems — a seamless end-to-end flow.</p>
+                    <div className={`${styles.pipeline} spotlight-group`} onMouseMove={handleSpotlightMouseMove}>
+                        {[
+                            { num: "01", title: "Data Sources", desc: "Ingest structured & unstructured data from any origin" },
+                            { num: "02", title: "AI Processing", desc: "Apply ML models, LLMs, and intelligent transformations" },
+                            { num: "03", title: "Automation Layer", desc: "Orchestrate workflows, triggers, and business logic" },
+                            { num: "04", title: "SaaS Delivery", desc: "Deploy scalable, multi-tenant platforms" },
+                            { num: "05", title: "Client Systems", desc: "Integrate with dashboards, APIs, and end-user tools" },
+                        ].map((step, i, arr) => (
+                            <div key={step.num} className={styles.pipelineStep}>
+                                <div className={`${styles.pipelineNode} spotlight-card`}>
+                                    <span className={styles.pipelineNum}>{step.num}</span>
+                                    <h3 className={styles.pipelineTitle}>{step.title}</h3>
+                                    <p className={styles.pipelineDesc}>{step.desc}</p>
                                 </div>
-                            )
-                        )}
+                                {i < arr.length - 1 && <div className={styles.pipelineConnector} />}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>

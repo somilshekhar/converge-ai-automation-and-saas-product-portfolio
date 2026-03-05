@@ -7,7 +7,10 @@
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.25em;
-    color: var(--accent);
+    background: linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     display: block;
     margin-bottom: 1.5rem;
 }
@@ -17,17 +20,10 @@
     border-top: 1px solid var(--border-subtle);
 }
 
-.philInner {
-    display: flex;
-    gap: 5rem;
-}
-
-.philLeft {
-    flex: 0 0 38%;
-}
-
-.philRight {
-    flex: 1;
+/* Text Reveal */
+.textReveal {
+    padding: clamp(8rem, 16vh, 14rem) 0;
+    border-top: 1px solid var(--border-subtle);
 }
 
 .pullQuote {
@@ -37,7 +33,16 @@
     font-style: italic;
     line-height: 1.5;
     color: var(--text-primary);
+    margin-top: 2rem;
+}
+
+.philBody {
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--text-secondary);
     margin-top: 1.5rem;
+    max-width: 800px;
 }
 
 /* Capabilities */
@@ -45,38 +50,97 @@
     border-top: 1px solid var(--border-subtle);
 }
 
+.capSubtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 600px;
+    margin-top: 0.75rem;
+    margin-bottom: 2.5rem;
+}
+
 .capGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .capCard {
-    padding: 2.5rem;
-    background: var(--bg-elevated);
+    position: relative;
+    padding: 2.5rem 2rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
 }
 
-.capIcon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid var(--accent);
-    margin-bottom: 1.25rem;
+.capCard:hover {
+    transform: translateY(-4px);
+    border-color: rgba(99, 102, 241, 0.35);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(99, 102, 241, 0.08);
+}
+
+.capHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.capNum {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.capEmoji {
+    font-size: 1.75rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.capCard:hover .capEmoji {
+    opacity: 1;
+    transform: scale(1.15);
 }
 
 .capTitle {
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
 }
 
 .capDesc {
     font-size: 0.85rem;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.7;
+}
+
+.capLine {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.1));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.capCard:hover .capLine {
+    transform: scaleX(1);
 }
 
 /* Team */
@@ -132,7 +196,10 @@
     font-family: var(--font-serif);
     font-size: 6rem;
     line-height: 0.8;
-    color: rgba(160, 160, 160, 0.2);
+    background: linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.15));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     display: block;
     margin-bottom: 1rem;
 }
@@ -192,6 +259,15 @@
         font-size: 1.1rem;
     }
 
+    .philBody {
+        font-size: 0.9rem;
+        margin-top: 1rem;
+    }
+
+    .textReveal {
+        padding: clamp(4rem, 8vh, 6rem) 0;
+    }
+
     .capGrid {
         grid-template-columns: 1fr 1fr;
         gap: 0.75rem;
@@ -201,12 +277,33 @@
         padding: 1.25rem;
     }
 
+    .capCard:hover {
+        transform: none;
+    }
+
+    .capHeader {
+        margin-bottom: 1rem;
+    }
+
+    .capNum {
+        font-size: 1.5rem;
+    }
+
+    .capEmoji {
+        font-size: 1.25rem;
+    }
+
     .capTitle {
         font-size: 0.85rem;
     }
 
     .capDesc {
         font-size: 0.78rem;
+    }
+
+    .capSubtitle {
+        font-size: 0.85rem;
+        margin-bottom: 1.5rem;
     }
 
     .teamGrid {
@@ -241,5 +338,17 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .capGrid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .metricsRow {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 }

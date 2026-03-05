@@ -7,12 +7,15 @@
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.25em;
-    color: var(--accent);
+    background: linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.4));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     display: block;
     margin-bottom: 1.5rem;
 }
 
-/* Timeline */
+/* ─── Timeline ─── */
 .timeline {
     border-top: 1px solid var(--border-subtle);
 }
@@ -29,7 +32,7 @@
     top: 0;
     bottom: 0;
     width: 1px;
-    background: var(--accent);
+    background: linear-gradient(180deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.15));
     transform: translateX(-50%);
 }
 
@@ -38,7 +41,7 @@
     justify-content: flex-end;
     padding-right: calc(50% + 3rem);
     position: relative;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .timelineEntry.entryRight {
@@ -51,13 +54,14 @@
 .entryDot {
     position: absolute;
     left: 50%;
-    top: 0.25rem;
+    top: 0.5rem;
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.4));
     transform: translateX(-50%);
     z-index: 2;
+    box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
 }
 
 .entryContent {
@@ -68,7 +72,10 @@
     font-family: var(--font-serif);
     font-size: 2.5rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.06);
+    background: linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.15));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     display: block;
     line-height: 1;
     margin-bottom: 0.5rem;
@@ -88,74 +95,144 @@
     line-height: 1.6;
 }
 
-/* Pipeline */
+/* ─── Automation Pipeline ─── */
 .pipeline {
     border-top: 1px solid var(--border-subtle);
 }
 
+.pipelineSubtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-top: 0.5rem;
+}
+
 .pipelineFlow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 0;
+    max-width: 1100px;
+    margin: 3rem auto 0;
+    align-items: stretch;
 }
 
-.pipeStep {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.pipeCard {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
 }
 
-.pipeNode {
-    padding: 1.25rem 2rem;
+.pipeCardInner {
+    padding: 2rem 1.5rem;
     background: var(--bg-elevated);
     border: 1px solid var(--border-medium);
-    font-size: 0.8rem;
-    font-weight: 500;
+    border-radius: var(--radius-lg);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.pipeCard:hover .pipeCardInner {
+    border-color: var(--accent, #6366f1);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.1);
+}
+
+.pipeNum {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.pipeIcon {
+    font-size: 1.75rem;
+    line-height: 1;
+    margin: 0.25rem 0;
+}
+
+.pipeTitle {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--text-primary);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    white-space: nowrap;
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+}
+
+.pipeDesc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-top: auto;
+}
+
+.pipeConnector {
+    position: absolute;
+    right: -1px;
+    top: 30%;
+    height: 40%;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, var(--accent, #6366f1), transparent);
+    z-index: 2;
 }
 
 .pipeArrow {
-    font-size: 1.25rem;
-    color: var(--accent);
-    padding: 0 0.5rem;
+    display: none;
 }
 
-/* Architecture */
+.pipeStep,
+.pipeNode {
+    display: none;
+}
+
+/* ─── System Architecture ─── */
 .architecture {
     border-top: 1px solid var(--border-subtle);
 }
 
 .archGrid {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
     max-width: 900px;
-    margin: 0 auto;
+    margin: 2rem auto 0;
+    align-items: center;
 }
 
 .archSide {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .archNode {
-    padding: 1rem 1.5rem;
+    padding: 1.25rem 1.5rem;
     background: var(--bg-elevated);
     border: 1px solid var(--border-medium);
+    border-radius: var(--radius-lg);
     font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--text-muted);
+    font-weight: 600;
+    color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     text-align: center;
     position: relative;
+    overflow: hidden;
+    transition: border-color var(--transition-medium), transform var(--transition-medium);
+}
+
+.archNode:hover {
+    border-color: var(--accent, #6366f1);
+    transform: translateY(-2px);
 }
 
 .archCenter {
@@ -172,19 +249,25 @@
     align-items: center;
     justify-content: center;
     background: var(--bg-elevated);
-    border: 2px solid var(--accent);
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--bg-elevated), var(--bg-elevated)),
+        linear-gradient(135deg, var(--accent, #6366f1), rgba(99, 102, 241, 0.3));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--text-primary);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.1);
 }
 
-/* CTA */
+/* ─── CTA ─── */
 .cta {
-    padding: clamp(8rem, 16vh, 16rem) 0;
+    padding: clamp(6rem, 12vh, 12rem) 0;
 }
 
+/* ─── Responsive ─── */
 @media (max-width: 768px) {
     .hero {
         padding: 7rem 0 2rem;
@@ -200,7 +283,7 @@
         padding-right: 0;
         justify-content: flex-start;
         text-align: left;
-        margin-bottom: 2.5rem;
+        margin-bottom: 2rem;
     }
 
     .entryDot {
@@ -226,24 +309,20 @@
     }
 
     .pipelineFlow {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 0.75rem;
     }
 
-    .pipeNode {
-        padding: 0.85rem 1.25rem;
-        font-size: 0.7rem;
-        white-space: normal;
-        text-align: center;
-        width: 100%;
+    .pipeConnector {
+        display: none;
     }
 
-    .pipeArrow {
-        transform: rotate(90deg);
+    .pipeCardInner {
+        padding: 1.5rem 1.25rem;
     }
 
     .archGrid {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
@@ -255,7 +334,7 @@
     }
 
     .archNode {
-        padding: 0.75rem 1rem;
+        padding: 0.85rem 1rem;
         font-size: 0.65rem;
     }
 
@@ -267,5 +346,42 @@
 
     .cta {
         padding: 5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .entryNum {
+        font-size: 1.5rem;
+    }
+
+    .entryTitle {
+        font-size: 0.85rem;
+    }
+
+    .entryDesc {
+        font-size: 0.78rem;
+    }
+
+    .archNode {
+        padding: 0.7rem 0.85rem;
+        font-size: 0.6rem;
+    }
+
+    .archCore {
+        width: 85px;
+        height: 85px;
+        font-size: 0.65rem;
+    }
+
+    .pipeCardInner {
+        padding: 1.25rem 1rem;
+    }
+
+    .pipeTitle {
+        font-size: 0.78rem;
+    }
+
+    .pipeDesc {
+        font-size: 0.75rem;
     }
 }

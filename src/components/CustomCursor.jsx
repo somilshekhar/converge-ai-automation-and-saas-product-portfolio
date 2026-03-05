@@ -8,8 +8,17 @@ export default function CustomCursor() {
     const pos = useRef({ x: 0, y: 0 });
     const ringPos = useRef({ x: 0, y: 0 });
     const hovering = useRef(false);
+    const viewHover = useRef(false);
 
     useEffect(() => {
+        // Don't run custom cursor on touch devices
+        const isTouchDevice = window.matchMedia("(hover: none)").matches;
+        if (isTouchDevice) {
+            if (dot.current) dot.current.style.display = "none";
+            if (ring.current) ring.current.style.display = "none";
+            return;
+        }
+
         const onMove = (e) => {
             pos.current = { x: e.clientX, y: e.clientY };
             if (dot.current) {
@@ -34,12 +43,29 @@ export default function CustomCursor() {
         const animate = () => {
             ringPos.current.x += (pos.current.x - ringPos.current.x) * 0.15;
             ringPos.current.y += (pos.current.y - ringPos.current.y) * 0.15;
+
+            // Check if hovered element wants to hide the custom cursor or use the "view" cursor
+            const hoveredEl = document.elementFromPoint(pos.current.x, pos.current.y);
+            const shouldHide = hoveredEl?.closest('[data-hide-cursor="true"]');
+            const shouldView = hoveredEl?.closest('[data-cursor="view"]');
+
+            viewHover.current = !!shouldView;
+
             if (ring.current) {
-                ring.current.style.transform = `translate(${ringPos.current.x}px, ${ringPos.current.y}px) scale(${hovering.current ? 1.6 : 1})`;
-                ring.current.style.opacity = hovering.current ? "0.6" : "1";
+                ring.current.style.transform = `translate(${ringPos.current.x}px, ${ringPos.current.y}px) scale(${hovering.current && !shouldHide && !shouldView ? 1.6 : 1})`;
+                ring.current.style.opacity = (shouldHide || shouldView) ? "0" : (hovering.current ? "0.6" : "1");
             }
             if (dot.current) {
-                dot.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px) scale(${hovering.current ? 0.5 : 1})`;
+                // If it's a view cursor, we transform the dot into the view bubble
+                if (shouldView) {
+                    dot.current.classList.add(styles.viewActive);
+                    dot.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px) scale(1)`;
+                    dot.current.style.opacity = "1";
+                } else {
+                    dot.current.classList.remove(styles.viewActive);
+                    dot.current.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px) scale(${hovering.current && !shouldHide ? 0.5 : 1})`;
+                    dot.current.style.opacity = shouldHide ? "0" : "1";
+                }
             }
             raf = requestAnimationFrame(animate);
         };
@@ -61,7 +87,9 @@ export default function CustomCursor() {
 
     return (
         <>
-            <div ref={dot} className={styles.dot} />
+            <div ref={dot} className={styles.dot}>
+                <span className={styles.viewText}>VIEW</span>
+            </div>
             <div ref={ring} className={styles.ring} />
         </>
     );

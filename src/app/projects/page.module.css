@@ -12,22 +12,47 @@
     margin-bottom: 1.5rem;
 }
 
+/* ─── STICKY SCROLL STACK ─── */
+.scrollStackContainer {
+    position: relative;
+    width: 100%;
+}
+
+.stickyWrapper {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* To break out of potential container constraints and go full-width */
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    background: var(--bg-primary);
+    box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.4);
+    will-change: transform;
+}
+
 .projectRow {
     display: flex;
     align-items: center;
     max-width: var(--container-max);
+    width: 100%;
     margin: 0 auto;
-    padding: 4rem var(--container-padding);
-    gap: 5rem;
-    border-top: 1px solid var(--border-subtle);
+    padding: 2rem var(--container-padding);
+    gap: 3.5rem;
     text-decoration: none;
     color: inherit;
-    transition: background var(--transition-slow);
+    transition: background var(--transition-slow), transform var(--transition-medium);
     cursor: pointer;
+    border-radius: var(--radius-lg);
 }
 
 .projectRow:hover {
-    background: rgba(28, 28, 30, 0.3);
+    background: rgba(28, 28, 30, 0.5);
+    transform: scale(0.99);
+    /* Slight press effect to feel tactile */
 }
 
 .projectRow:hover .link {
@@ -39,8 +64,9 @@
 }
 
 .projectImage {
-    flex: 0 0 58%;
+    flex: 0 0 54%;
     overflow: hidden;
+    border-radius: var(--radius-lg);
 }
 
 .projectInfo {
@@ -107,6 +133,13 @@
         padding: 7rem 0 2rem;
     }
 
+    .stickyWrapper {
+        height: 100dvh;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+
     .projectRow,
     .projectRow.reversed {
         flex-direction: column;
@@ -139,5 +172,22 @@
 
     .cta {
         padding: 5rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.1rem;
+    }
+
+    .projectRow,
+    .projectRow.reversed {
+        padding: 1.5rem var(--container-padding);
+        gap: 1rem;
+    }
+
+    .projectLabel {
+        font-size: 0.6rem;
+        margin-bottom: 0.5rem;
     }
 }

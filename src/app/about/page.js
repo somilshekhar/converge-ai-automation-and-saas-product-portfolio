@@ -1,4 +1,6 @@
 import MetricCounter from "@/components/MetricCounter";
+import TextReveal from "@/components/TextReveal";
+import SpotlightGrid from "@/components/SpotlightGrid";
 import styles from "./page.module.css";
 
 export const metadata = {
@@ -7,12 +9,12 @@ export const metadata = {
 };
 
 const capabilities = [
-    { title: "Natural Language Processing", desc: "Text analysis, sentiment, entity recognition" },
-    { title: "Computer Vision", desc: "Image classification, object detection, OCR" },
-    { title: "LLM Integration", desc: "GPT, Claude, Gemini API integration & fine-tuning" },
-    { title: "RAG Architecture", desc: "Retrieval-augmented generation pipelines" },
-    { title: "Workflow Automation", desc: "Process orchestration & intelligent triggers" },
-    { title: "ML Deployment", desc: "Model serving, monitoring, and MLOps" },
+    { num: "01", icon: "🧠", title: "Natural Language Processing", desc: "Text analysis, sentiment detection, entity recognition & language understanding" },
+    { num: "02", icon: "👁️", title: "Computer Vision", desc: "Image classification, object detection, OCR & visual intelligence systems" },
+    { num: "03", icon: "⚡", title: "LLM Integration", desc: "GPT, Claude, Gemini API integration, fine-tuning & prompt engineering" },
+    { num: "04", icon: "🔗", title: "RAG Architecture", desc: "Retrieval-augmented generation pipelines for contextual AI responses" },
+    { num: "05", icon: "🔄", title: "Workflow Automation", desc: "Process orchestration, intelligent triggers & end-to-end automation" },
+    { num: "06", icon: "🚀", title: "ML Deployment", desc: "Model serving, monitoring, MLOps & production-grade infrastructure" },
 ];
 
 export default function AboutPage() {
@@ -35,31 +37,26 @@ export default function AboutPage() {
             {/* ─── PHILOSOPHY ─── */}
             <section className={`section ${styles.philosophy} gsap-reveal`}>
                 <div className="container">
-                    <div className={styles.philInner}>
-                        <div className={styles.philLeft}>
-                            <span className="section-heading">Our Philosophy</span>
-                            <blockquote className={styles.pullQuote}>
-                                &ldquo;We see digital as more than visuals — it&apos;s a system of
-                                experiences that drive clarity, performance, and measurable
-                                impact.&rdquo;
-                            </blockquote>
-                        </div>
-                        <div className={styles.philRight}>
-                            <p className="body-text">
-                                Every project we take on is an opportunity to transform ideas into
-                                purposeful, scalable digital solutions. We work across branding,
-                                web and application development, product design, automation, and
-                                digital consulting.
-                            </p>
-                            <p className="body-text" style={{ marginTop: "1.25rem" }}>
-                                Our approach blends creative thinking with technical precision —
-                                ensuring every interface, workflow, and interaction is built to
-                                perform. From early-stage startups to growing enterprises, we help
-                                teams turn complexity into clean, efficient digital experiences
-                                that evolve with their business.
-                            </p>
-                        </div>
-                    </div>
+                    <span className="section-heading">Our Philosophy</span>
+                    <TextReveal
+                        text="We see digital as more than visuals — it's a system of experiences that drive clarity, performance, and measurable impact."
+                        className={styles.pullQuote}
+                    />
+                    <TextReveal
+                        text="Every project we take on is an opportunity to transform ideas into purposeful, scalable digital solutions. We work across branding, web and application development, product design, automation, and digital consulting."
+                        className={styles.philBody}
+                    />
+                    <TextReveal
+                        text="Our approach blends creative thinking with technical precision — ensuring every interface, workflow, and interaction is built to perform. From early-stage startups to growing enterprises, we help teams turn complexity into clean, efficient digital experiences that evolve with their business."
+                        className={styles.philBody}
+                    />
+                </div>
+            </section>
+
+            {/* ─── TEXT REVEAL ─── */}
+            <section className={`section ${styles.textReveal}`}>
+                <div className="container">
+                    <TextReveal text="Blending design and code with functional clarity and creative precision. Delivering thoughtful digital systems with structure, flow, and expressive interaction." />
                 </div>
             </section>
 
@@ -67,38 +64,25 @@ export default function AboutPage() {
             <section className={`section ${styles.capabilities}`}>
                 <div className="container">
                     <p className="section-heading gsap-reveal">AI Lab Capabilities</p>
-                    <div className={`${styles.capGrid} gsap-stagger-group`}>
+                    <p className={`${styles.capSubtitle} gsap-reveal`}>
+                        Six core pillars powering intelligent systems — from language understanding to production deployment.
+                    </p>
+                    <SpotlightGrid className={`${styles.capGrid} gsap-stagger-group`}>
                         {capabilities.map((c) => (
-                            <div key={c.title} className={styles.capCard}>
-                                <div className={styles.capIcon} />
+                            <div key={c.title} className={`${styles.capCard} spotlight-card`}>
+                                <div className={styles.capHeader}>
+                                    <span className={styles.capNum}>{c.num}</span>
+                                    <span className={styles.capEmoji}>{c.icon}</span>
+                                </div>
                                 <h3 className={styles.capTitle}>{c.title}</h3>
                                 <p className={styles.capDesc}>{c.desc}</p>
+                                <div className={styles.capLine} />
                             </div>
                         ))}
-                    </div>
+                    </SpotlightGrid>
                 </div>
             </section>
 
-            {/* ─── TEAM ─── */}
-            <section className={`section ${styles.team} gsap-reveal`}>
-                <div className="container">
-                    <p className="section-heading">The Team</p>
-                    <div className={`${styles.teamGrid} gsap-stagger-group`}>
-                        {[
-                            { name: "Somil Shekhar", role: "Founder & Lead Engineer" },
-                            { name: "Design Lead", role: "UI/UX & Brand Strategy" },
-                            { name: "AI Engineer", role: "ML & LLM Systems" },
-                            { name: "Full-Stack Dev", role: "SaaS & Platform Engineering" },
-                        ].map((m) => (
-                            <div key={m.name} className={styles.teamMember}>
-                                <div className={styles.avatar} />
-                                <span className={styles.memberName}>{m.name}</span>
-                                <span className={styles.memberRole}>{m.role}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* ─── TESTIMONIAL ─── */}
             <section className={`section ${styles.testimonials} gsap-reveal`}>
@@ -106,11 +90,10 @@ export default function AboutPage() {
                     <p className="section-heading">Client Voices</p>
                     <div className={styles.testimonialBlock}>
                         <span className={styles.quoteIcon}>&ldquo;</span>
-                        <blockquote className={styles.testimonialText}>
-                            The Converge Digitals team delivered a seamless digital experience
-                            that exceeded our expectations. Their technical depth and attention
-                            to detail set them apart.
-                        </blockquote>
+                        <TextReveal
+                            text="The Converge Digitals team delivered a seamless digital experience that exceeded our expectations. Their technical depth and attention to detail set them apart."
+                            className={styles.testimonialText}
+                        />
                         <div className={styles.testimonialAuthor}>
                             <span className={styles.authorName}>Wade Warren</span>
                             <span className={styles.authorTitle}>Enterprise Client</span>

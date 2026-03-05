@@ -31,20 +31,20 @@ export default async function ProjectDetail({ params }) {
         <>
             {/* ─── HERO ─── */}
             <section className={styles.hero}>
-                <div className="container">
-                    <span className={styles.label}>CASE STUDY</span>
-                    <h1 className={styles.heading}>{project.title}</h1>
-                    <div className={styles.heroTags}>
+                <div className="container gsap-hero-entrance">
+                    <span className={`${styles.label} gsap-reveal`}>CASE STUDY</span>
+                    <h1 className={`${styles.heading} gsap-heading`}>{project.title}</h1>
+                    <div className={`${styles.heroTags} gsap-reveal`}>
                         {project.tags.map((t) => (
                             <span key={t} className={styles.tag}>{t}</span>
                         ))}
                     </div>
-                    <p className={styles.heroSummary}>{project.summary}</p>
+                    <p className={`${styles.heroSummary} gsap-reveal`}>{project.summary}</p>
                 </div>
             </section>
 
             {/* ─── MAIN IMAGE ─── */}
-            <section className={styles.mainImage}>
+            <section className={`${styles.mainImage} gsap-reveal`}>
                 <div className="image-placeholder" style={{ paddingBottom: "48%" }} />
             </section>
 
@@ -52,10 +52,10 @@ export default async function ProjectDetail({ params }) {
             <section className={`section ${styles.twoCol}`}>
                 <div className="container">
                     <div className={styles.twoColInner}>
-                        <div className={styles.colLabel}>
+                        <div className={`${styles.colLabel} gsap-reveal`}>
                             <span className="section-heading">The Challenge</span>
                         </div>
-                        <div className={styles.colContent}>
+                        <div className={`${styles.colContent} gsap-reveal`}>
                             <p className="body-text">{project.challenge}</p>
                         </div>
                     </div>
@@ -66,13 +66,13 @@ export default async function ProjectDetail({ params }) {
             <section className={`section ${styles.twoCol}`}>
                 <div className="container">
                     <div className={styles.twoColInner}>
-                        <div className={styles.colLabel}>
+                        <div className={`${styles.colLabel} gsap-reveal`}>
                             <span className="section-heading">Our Approach</span>
                         </div>
                         <div className={styles.colContent}>
                             <ol className={styles.approachList}>
                                 {project.approach.map((step, i) => (
-                                    <li key={i} className={styles.approachItem}>{step}</li>
+                                    <li key={i} className={`${styles.approachItem} gsap-reveal`}>{step}</li>
                                 ))}
                             </ol>
                         </div>
@@ -84,16 +84,16 @@ export default async function ProjectDetail({ params }) {
             <section className={styles.dualImages}>
                 <div className="container">
                     <div className={styles.dualGrid}>
-                        <div className="image-placeholder" style={{ paddingBottom: "65%" }} />
-                        <div className="image-placeholder" style={{ paddingBottom: "65%" }} />
+                        <div className="image-placeholder gsap-reveal" style={{ paddingBottom: "65%" }} />
+                        <div className="image-placeholder gsap-reveal" style={{ paddingBottom: "65%" }} />
                     </div>
                 </div>
             </section>
 
             {/* ─── IMPACT ─── */}
-            <section className={`section ${styles.impact}`}>
+            <section className={`section ${styles.impact} gsap-reveal`}>
                 <div className="container">
-                    <p className="section-heading">Impact</p>
+                    <p className="section-heading gsap-reveal">Impact</p>
                     <div className={styles.metricsRow}>
                         {project.metrics.map((m) => (
                             <MetricCounter key={m.label} value={m.value} suffix={m.suffix} label={m.label} />
@@ -103,19 +103,19 @@ export default async function ProjectDetail({ params }) {
             </section>
 
             {/* ─── TECH STACK ─── */}
-            <section className={`section ${styles.techSection}`}>
+            <section className={`section ${styles.techSection} gsap-reveal`}>
                 <div className="container">
-                    <p className="section-heading">Technologies Used</p>
+                    <p className="section-heading gsap-reveal">Technologies Used</p>
                     <div className={styles.techRow}>
                         {project.technologies.map((tech) => (
-                            <span key={tech} className={styles.techBadge}>{tech}</span>
+                            <span key={tech} className={`${styles.techBadge} gsap-reveal`}>{tech}</span>
                         ))}
                     </div>
                 </div>
             </section>
 
             {/* ─── NAV ─── */}
-            <section className={styles.projectNav}>
+            <section className={`${styles.projectNav} gsap-reveal`}>
                 <div className="container">
                     <div className={styles.navDivider} />
                     <div className={styles.navRow}>
