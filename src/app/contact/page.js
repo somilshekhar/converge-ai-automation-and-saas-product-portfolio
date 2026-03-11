@@ -1,9 +1,11 @@
 import styles from "./page.module.css";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata = {
-    title: "Contact – Converge Digitals AI Lab",
+export const metadata = buildPageMetadata({
+    title: "Contact | Converge Digitals AI Lab",
     description: "Let's build something impactful together. Tell us about your project.",
-};
+    path: "/contact",
+});
 
 export default function ContactPage() {
     return (

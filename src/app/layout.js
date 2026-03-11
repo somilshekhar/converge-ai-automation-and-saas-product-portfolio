@@ -3,18 +3,28 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimationProvider from "@/components/AnimationProvider";
 import CustomCursor from "@/components/CustomCursor";
+import { buildPageMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata = {
-  title: "Converge Digitals – AI, Automation & SaaS Solutions",
-  description:
-    "Custom SaaS tools, workflow automation, internal systems, and AI-assisted business solutions. Built to perform.",
-  keywords: "AI, SaaS, automation, workflow, machine learning, Converge Digitals",
-  openGraph: {
-    title: "Converge Digitals – AI Lab",
-    description: "Premium AI engineering studio portfolio",
-    type: "website",
-    url: "https://www.convergedigitals.com",
+  metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
+  keywords: siteConfig.keywords,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
+  ...buildPageMetadata({
+    title: siteConfig.title,
+    description: siteConfig.description,
+    path: "/",
+  }),
 };
 
 export default function RootLayout({ children }) {

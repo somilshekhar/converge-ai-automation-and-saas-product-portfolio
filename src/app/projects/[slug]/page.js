@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "@/lib/data";
 import MetricCounter from "@/components/MetricCounter";
+import { buildPageMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
 
 export async function generateStaticParams() {
@@ -12,10 +13,13 @@ export async function generateMetadata({ params }) {
     const { slug } = await params;
     const project = projects.find((p) => p.slug === slug);
     if (!project) return {};
-    return {
-        title: `${project.title} – Converge Digitals`,
+
+    return buildPageMetadata({
+        title: `${project.title} Case Study | Converge Digitals AI Lab`,
         description: project.summary,
-    };
+        path: `/projects/${project.slug}`,
+        type: "article",
+    });
 }
 
 export default async function ProjectDetail({ params }) {

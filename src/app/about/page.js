@@ -1,12 +1,14 @@
 import MetricCounter from "@/components/MetricCounter";
 import TextReveal from "@/components/TextReveal";
 import SpotlightGrid from "@/components/SpotlightGrid";
+import { buildPageMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
 
-export const metadata = {
-    title: "About – Converge Digitals AI Lab",
+export const metadata = buildPageMetadata({
+    title: "About | Converge Digitals AI Lab",
     description: "Where strategy meets engineering. Learn about our philosophy, capabilities, and team.",
-};
+    path: "/about",
+});
 
 const capabilities = [
     { num: "01", icon: "🧠", title: "Natural Language Processing", desc: "Text analysis, sentiment detection, entity recognition & language understanding" },

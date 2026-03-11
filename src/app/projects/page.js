@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { projects } from "@/lib/data";
+import { buildPageMetadata } from "@/lib/seo";
 import styles from "./page.module.css";
 
-export const metadata = {
-    title: "Projects – Converge Digitals AI Lab",
+export const metadata = buildPageMetadata({
+    title: "Projects | Converge Digitals AI Lab",
     description: "Strategy, design, and technology — in action. Explore our case studies.",
-};
+    path: "/projects",
+});
 
 export default function ProjectsPage() {
     return (

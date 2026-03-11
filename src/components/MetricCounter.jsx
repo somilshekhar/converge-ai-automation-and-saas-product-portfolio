@@ -4,7 +4,8 @@ import styles from "./MetricCounter.module.css";
 
 export default function MetricCounter({ value, label, suffix = "" }) {
     const ref = useRef(null);
-    const [display, setDisplay] = useState("0");
+    const hasAnimated = useRef(false);
+    const [display, setDisplay] = useState(value);
 
     const animateCount = useCallback(() => {
         const numericValue = parseFloat(value.replace(/[^0-9.]/g, ""));
@@ -39,10 +40,11 @@ export default function MetricCounter({ value, label, suffix = "" }) {
 
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
-                    // Reset to 0 and re-animate every time it enters the viewport
+                if (entry.isIntersecting && !hasAnimated.current) {
+                    hasAnimated.current = true;
                     setDisplay("0");
                     animateCount();
+                    observer.disconnect();
                 }
             },
             { threshold: 0.3 }
